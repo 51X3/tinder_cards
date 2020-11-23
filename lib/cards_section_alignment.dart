@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'profile_card_alignment.dart';
 import 'dart:math';
 
+bool buttonsAlign;
+
 bool swipedRight = false;
 bool swipedLeft = false;
-bool     swipedUp = false;
+bool swipedUp = false;
 
 List<Alignment> cardsAlign = [
   Alignment(0.0, 1.0),
@@ -15,13 +17,14 @@ List<Alignment> cardsAlign = [
 List<Size> cardsSize = List(3);
 
 class CardsSectionAlignment extends StatefulWidget {
-  CardsSectionAlignment(BuildContext context) {
+  CardsSectionAlignment(BuildContext context,bool BOOL) {
     cardsSize[0] = Size(MediaQuery.of(context).size.width * 0.9,
         MediaQuery.of(context).size.height * 0.6);
     cardsSize[1] = Size(MediaQuery.of(context).size.width * 0.85,
         MediaQuery.of(context).size.height * 0.55);
     cardsSize[2] = Size(MediaQuery.of(context).size.width * 0.8,
         MediaQuery.of(context).size.height * 0.5);
+    buttonsAlign = BOOL;
   }
 
   @override
@@ -65,6 +68,17 @@ class _CardsSectionState extends State<CardsSectionAlignment>
     swipedRight = false;
     swipedLeft = false;
     swipedUp = false;
+    if(buttonsAlign){
+      setState(
+            () {
+          // 20 is the "speed" at which moves the card
+          frontCardAlign = Alignment(8,0);
+
+          frontCardRot = frontCardAlign.x; // * rotation speed;
+          animateCards();
+        },
+      );
+    }
     return Expanded(
         child: Stack(
       children: <Widget>[
@@ -81,7 +95,6 @@ class _CardsSectionState extends State<CardsSectionAlignment>
                   // Add what the user swiped in the last frame to the alignment of the card
                   setState(
                     () {
-                      print(frontCardAlign);
                       // 20 is the "speed" at which moves the card
                       frontCardAlign = Alignment(
                           frontCardAlign.x +
@@ -230,21 +243,28 @@ class CardsAnimation {
 
 Alignment DisappearingAction(X,Y){
   if (Y<-7){
+    swipedUp = true;
+    print("up");
     return Alignment(
       0.0,
       Y < 0.0 ? Y - 30.0 : 0.0 ,
     );
   }
   else{
-    if (X > 0) {
+    if (X < 0) {
+      swipedLeft = true;
+      print("left");
       return Alignment(
-        X + 30.0,
+        X - 30.0,
         0.0,
       );
     }
     else{
+      swipedRight = true;
+      print("$buttonsAlign right");
+      buttonsAlign = false;
       return Alignment(
-        X - 30.0,
+        X + 30.0,
         0.0,
       );
     }

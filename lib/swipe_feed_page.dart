@@ -9,6 +9,7 @@ class SwipeFeedPage extends StatefulWidget {
 
 class _SwipeFeedPageState extends State<SwipeFeedPage> {
   bool showAlignmentCards = false;
+  bool LIKE = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
       body: Column(
         children: <Widget>[
           showAlignmentCards
-              ? CardsSectionAlignment(context)
+              ? CardsSectionAlignment(context,LIKE)
               : CardsSectionDraggable(),
           buttonsRow(),
         ],
@@ -76,6 +77,9 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
           FloatingActionButton(
             elevation: 7,
             onPressed: () {
+              setState(() {
+                LIKE = true;
+              });
               print("LIKE");
             },
             backgroundColor: Colors.white,
