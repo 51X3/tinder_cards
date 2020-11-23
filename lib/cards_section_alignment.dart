@@ -229,7 +229,7 @@ class CardsAnimation {
 }
 
 Alignment DisappearingAction(X,Y){
-  if (Y<0){
+  if (Y<-7){
     return Alignment(
       0.0,
       Y < 0.0 ? Y - 30.0 : 0.0 ,
