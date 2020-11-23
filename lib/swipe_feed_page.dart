@@ -14,11 +14,13 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 7.0,
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.settings, color: Colors.grey)),
+            onPressed: () {
+              print("GOES TO SETTINGS");
+            }, icon: Icon(Icons.settings, color: Colors.grey[700])),
         title: Switch(
           onChanged: (bool value) => setState(() => showAlignmentCards = value),
           value: showAlignmentCards,
@@ -26,17 +28,20 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
         ),
         actions: <Widget>[
           IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.question_answer, color: Colors.grey)),
+              onPressed: () {
+                print("GOES TO CHAT");
+              },
+              icon: Icon(Icons.question_answer, color: Colors.grey[700])),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white
+      ,
       body: Column(
         children: <Widget>[
           showAlignmentCards
               ? CardsSectionAlignment(context)
               : CardsSectionDraggable(),
-          buttonsRow()
+          buttonsRow(),
         ],
       ),
     );
@@ -50,29 +55,41 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           FloatingActionButton(
+            elevation: 4,
             mini: true,
-            onPressed: () {},
+            onPressed: () {
+              print("UNDO");
+            },
             backgroundColor: Colors.white,
-            child: Icon(Icons.loop, color: Colors.yellow),
+            child: Icon(Icons.loop, color: Colors.deepPurple[700]),
           ),
-          Padding(padding: EdgeInsets.only(right: 8.0)),
+          Padding(padding: EdgeInsets.only(right: 7.0)),
           FloatingActionButton(
-            onPressed: () {},
+            elevation: 7,
+            onPressed: () {
+              print("DISLIKE");
+            },
             backgroundColor: Colors.white,
-            child: Icon(Icons.close, color: Colors.red),
+            child: Icon(Icons.close, color: Colors.black87, size: 33,),
           ),
-          Padding(padding: EdgeInsets.only(right: 8.0)),
+          Padding(padding: EdgeInsets.only(right: 13.0)),
           FloatingActionButton(
-            onPressed: () {},
+            elevation: 7,
+            onPressed: () {
+              print("LIKE");
+            },
             backgroundColor: Colors.white,
-            child: Icon(Icons.favorite, color: Colors.green),
+            child: Icon(Icons.favorite, color: Colors.purple[700], size: 33,),
           ),
-          Padding(padding: EdgeInsets.only(right: 8.0)),
+          Padding(padding: EdgeInsets.only(right: 7.0)),
           FloatingActionButton(
+            elevation: 4,
             mini: true,
-            onPressed: () {},
+            onPressed: () {
+              print("SUPERLIKE");
+            },
             backgroundColor: Colors.white,
-            child: Icon(Icons.star, color: Colors.blue),
+            child: Icon(Icons.star, color: Colors.indigo[700]),
           ),
         ],
       ),

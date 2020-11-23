@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'profile_card_alignment.dart';
 import 'dart:math';
 
+bool swipedRight = false;
+bool swipedLeft = false;
+bool     swipedUp = false;
+
 List<Alignment> cardsAlign = [
   Alignment(0.0, 1.0),
   Alignment(0.0, 0.8),
   Alignment(0.0, 0.0)
 ];
+
 List<Size> cardsSize = List(3);
 
 class CardsSectionAlignment extends StatefulWidget {
@@ -40,7 +45,7 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
     // Init cards
     for (cardsCounter = 0; cardsCounter < 3; cardsCounter++) {
-      cards.add(ProfileCardAlignment(cardsCounter));
+      cards.add(ProfileCardAlignment());
     }
 
     frontCardAlign = cardsAlign[2];
@@ -56,6 +61,10 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    swipedRight = false;
+    swipedLeft = false;
+    swipedUp = false;
     return Expanded(
         child: Stack(
       children: <Widget>[
@@ -70,25 +79,36 @@ class _CardsSectionState extends State<CardsSectionAlignment>
                 // While dragging the first card
                 onPanUpdate: (DragUpdateDetails details) {
                   // Add what the user swiped in the last frame to the alignment of the card
-                  setState(() {
-                    // 20 is the "speed" at which moves the card
-                    frontCardAlign = Alignment(
-                        frontCardAlign.x +
-                            20 *
-                                details.delta.dx /
-                                MediaQuery.of(context).size.width,
-                        frontCardAlign.y +
-                            40 *
-                                details.delta.dy /
-                                MediaQuery.of(context).size.height);
+                  setState(
+                    () {
+                      print(frontCardAlign);
+                      // 20 is the "speed" at which moves the card
+                      frontCardAlign = Alignment(
+                          frontCardAlign.x +
+                              20 *
+                                  details.delta.dx /
+                                  MediaQuery.of(context).size.width,
+                          frontCardAlign.y +
+                              40 *
+                                  details.delta.dy /
+                                  MediaQuery.of(context).size.height);
 
-                    frontCardRot = frontCardAlign.x; // * rotation speed;
-                  });
+                      frontCardRot = frontCardAlign.x; // * rotation speed;
+                    },
+                  );
                 },
                 // When releasing the first card
                 onPanEnd: (_) {
                   // If the front card was swiped far enough to count as swiped
-                  if (frontCardAlign.x > 3.0 || frontCardAlign.x < -3.0) {
+                  bool acceptableposition = frontCardAlign.x > 4.0 ||
+                      frontCardAlign.x < -4.0 ||
+                      frontCardAlign.y < -7.0;
+                  if (acceptableposition) {
+                    if (frontCardAlign.y < -7.0) {
+                      setState(() {
+                        frontCardRot = 0.0;
+                      });
+                    }
                     animateCards();
                   } else {
                     // Return to the initial rotation and alignment
@@ -151,7 +171,7 @@ class _CardsSectionState extends State<CardsSectionAlignment>
       cards[1] = cards[2];
       cards[2] = temp;
 
-      cards[2] = ProfileCardAlignment(cardsCounter);
+      cards[2] = ProfileCardAlignment(cardNum: cardsCounter);
       cardsCounter++;
 
       frontCardAlign = defaultFrontCardAlign;
@@ -170,8 +190,11 @@ class CardsAnimation {
   static Animation<Alignment> backCardAlignmentAnim(
       AnimationController parent) {
     return AlignmentTween(begin: cardsAlign[0], end: cardsAlign[1]).animate(
-        CurvedAnimation(
-            parent: parent, curve: Interval(0.4, 0.7, curve: Curves.easeIn)));
+      CurvedAnimation(
+        parent: parent,
+        curve: Interval(0.4, 0.7, curve: Curves.easeIn),
+      ),
+    );
   }
 
   static Animation<Size> backCardSizeAnim(AnimationController parent) {
@@ -195,13 +218,35 @@ class CardsAnimation {
 
   static Animation<Alignment> frontCardDisappearAlignmentAnim(
       AnimationController parent, Alignment beginAlign) {
+
     return AlignmentTween(
             begin: beginAlign,
-            end: Alignment(
-                beginAlign.x > 0 ? beginAlign.x + 30.0 : beginAlign.x - 30.0,
-                0.0) // Has swiped to the left or right?
+            end: DisappearingAction(beginAlign.x,beginAlign.y),// Has swiped to the left or right?
             )
         .animate(CurvedAnimation(
             parent: parent, curve: Interval(0.0, 0.5, curve: Curves.easeIn)));
+  }
+}
+
+Alignment DisappearingAction(X,Y){
+  if (Y<0){
+    return Alignment(
+      0.0,
+      Y < 0.0 ? Y - 30.0 : 0.0 ,
+    );
+  }
+  else{
+    if (X > 0) {
+      return Alignment(
+        X + 30.0,
+        0.0,
+      );
+    }
+    else{
+      return Alignment(
+        X - 30.0,
+        0.0,
+      );
+    }
   }
 }
