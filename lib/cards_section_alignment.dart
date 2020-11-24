@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'profile_card_alignment.dart';
 import 'dart:math';
 
-bool buttonsAlign;
+int buttonsAlign;
 
 bool swipedRight = false;
 bool swipedLeft = false;
@@ -17,7 +17,7 @@ List<Alignment> cardsAlign = [
 List<Size> cardsSize = List(3);
 
 class CardsSectionAlignment extends StatefulWidget {
-  CardsSectionAlignment(BuildContext context,bool BOOL) {
+  CardsSectionAlignment(BuildContext context,int BOOL) {
     cardsSize[0] = Size(MediaQuery.of(context).size.width * 0.9,
         MediaQuery.of(context).size.height * 0.6);
     cardsSize[1] = Size(MediaQuery.of(context).size.width * 0.85,
@@ -64,21 +64,10 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     swipedRight = false;
     swipedLeft = false;
     swipedUp = false;
-    if(buttonsAlign){
-      setState(
-            () {
-          // 20 is the "speed" at which moves the card
-          frontCardAlign = Alignment(8,0);
-
-          frontCardRot = frontCardAlign.x; // * rotation speed;
-          animateCards();
-        },
-      );
-    }
+    runfast(buttonsAlign);
     return Expanded(
         child: Stack(
       children: <Widget>[
@@ -197,6 +186,66 @@ class _CardsSectionState extends State<CardsSectionAlignment>
     _controller.value = 0.0;
     _controller.forward();
   }
+
+  void runfast(int ba){
+    switch(ba){
+      case 1:
+        setState(
+                () {
+              frontCardAlign = Alignment(8,0);
+
+              frontCardRot = frontCardAlign.x; // * rotation speed;
+              animateCards();
+            }
+        );
+        break;
+      case 2:
+        setState(
+                () {
+              // 20 is the "speed" at which moves the card
+              frontCardAlign = Alignment(-8,0);
+
+              frontCardRot = frontCardAlign.x; // * rotation speed;
+              animateCards();
+            }
+        );
+        break;
+      case 3:
+        setState(
+                () {
+              // 20 is the "speed" at which moves the card
+              frontCardAlign = Alignment(8,0);
+
+              frontCardRot = frontCardAlign.x; // * rotation speed;
+              animateCards();
+            }
+        );
+        break;
+      case 4:
+        setState(
+                () {
+              // 20 is the "speed" at which moves the card
+              frontCardAlign = Alignment(0,-8);
+
+              frontCardRot = frontCardAlign.x; // * rotation speed;
+              animateCards();
+            }
+        );
+        break;
+      default:
+    }
+    // if(ba){
+    //   setState(
+    //         () {
+    //       // 20 is the "speed" at which moves the card
+    //       frontCardAlign = Alignment(8,0);
+    //
+    //       frontCardRot = frontCardAlign.x; // * rotation speed;
+    //       animateCards();
+    //     },
+    //   );
+    // }
+  }
 }
 
 class CardsAnimation {
@@ -244,6 +293,7 @@ class CardsAnimation {
 Alignment DisappearingAction(X,Y){
   if (Y<-7){
     swipedUp = true;
+    buttonsAlign = 0;
     print("up");
     return Alignment(
       0.0,
@@ -253,6 +303,7 @@ Alignment DisappearingAction(X,Y){
   else{
     if (X < 0) {
       swipedLeft = true;
+      buttonsAlign = 0;
       print("left");
       return Alignment(
         X - 30.0,
@@ -261,8 +312,7 @@ Alignment DisappearingAction(X,Y){
     }
     else{
       swipedRight = true;
-      print("$buttonsAlign right");
-      buttonsAlign = false;
+      buttonsAlign = 0;
       return Alignment(
         X + 30.0,
         0.0,
@@ -270,3 +320,4 @@ Alignment DisappearingAction(X,Y){
     }
   }
 }
+

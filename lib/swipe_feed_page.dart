@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'cards_section_alignment.dart';
 import 'cards_section_draggable.dart';
 
+int command = 0;
+
 class SwipeFeedPage extends StatefulWidget {
   @override
   _SwipeFeedPageState createState() => _SwipeFeedPageState();
 }
 
 class _SwipeFeedPageState extends State<SwipeFeedPage> {
+
   bool showAlignmentCards = false;
-  bool LIKE = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
       body: Column(
         children: <Widget>[
           showAlignmentCards
-              ? CardsSectionAlignment(context,LIKE)
+              ? CardsSectionAlignment(context,command)
               : CardsSectionDraggable(),
           buttonsRow(),
         ],
@@ -60,6 +62,9 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
             mini: true,
             onPressed: () {
               print("UNDO");
+              setState(() {
+                command = 1;
+              });
             },
             backgroundColor: Colors.white,
             child: Icon(Icons.loop, color: Colors.deepPurple[700]),
@@ -69,6 +74,9 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
             elevation: 7,
             onPressed: () {
               print("DISLIKE");
+              setState(() {
+                command = 2;
+              });
             },
             backgroundColor: Colors.white,
             child: Icon(Icons.close, color: Colors.black87, size: 33,),
@@ -78,7 +86,7 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
             elevation: 7,
             onPressed: () {
               setState(() {
-                LIKE = true;
+                command = 3;
               });
               print("LIKE");
             },
@@ -91,6 +99,9 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
             mini: true,
             onPressed: () {
               print("SUPERLIKE");
+              setState(() {
+                command = 4;
+              });
             },
             backgroundColor: Colors.white,
             child: Icon(Icons.star, color: Colors.indigo[700]),
