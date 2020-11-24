@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1bab011d-e71c-4999-92ef-987bc3d494f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/cards_section_alignment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/cards_section_alignment.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/swipe_feed_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swipe_feed_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,26 +50,26 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="100" width="719" height="568" key="AVDManager" timestamp="1606139300931">
+    <state x="100" y="100" width="719" height="568" key="AVDManager" timestamp="1606217491439">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="100" y="100" width="719" height="568" key="AVDManager/0.0.1366.768@0.0.1366.768" timestamp="1606139300931" />
-    <state width="859" height="160" key="GridCell.Tab.0.bottom" timestamp="1606161323997">
+    <state x="100" y="100" width="719" height="568" key="AVDManager/0.0.1366.768@0.0.1366.768" timestamp="1606217491439" />
+    <state width="859" height="160" key="GridCell.Tab.0.bottom" timestamp="1606175814712">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="859" height="160" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1606161323997" />
-    <state width="859" height="160" key="GridCell.Tab.0.center" timestamp="1606161323997">
+    <state width="859" height="160" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1606175814712" />
+    <state width="859" height="160" key="GridCell.Tab.0.center" timestamp="1606175814712">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="859" height="160" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1606161323997" />
-    <state width="859" height="160" key="GridCell.Tab.0.left" timestamp="1606161323997">
+    <state width="859" height="160" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1606175814712" />
+    <state width="859" height="160" key="GridCell.Tab.0.left" timestamp="1606175814712">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="859" height="160" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1606161323997" />
-    <state width="859" height="160" key="GridCell.Tab.0.right" timestamp="1606161323997">
+    <state width="859" height="160" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1606175814712" />
+    <state width="859" height="160" key="GridCell.Tab.0.right" timestamp="1606175814712">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="859" height="160" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1606161323997" />
+    <state width="859" height="160" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1606175814712" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1606170820012">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
